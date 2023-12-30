@@ -42,6 +42,11 @@ export const sidebarLinks: SidebarLink[] = [
     route: "/ask-question",
     label: "Ask a question",
   },
+  {
+    imgURL: "/assets/icons/suitcase.svg",
+    route: "/dashboard",
+    label: "Dashboard",
+  },
 ];
 
 export const BADGE_CRITERIA = {
