@@ -1,4 +1,4 @@
-import { SidebarLink } from "@/types";
+import { SidebarLink, SidebarDashLink } from "@/types";
 
 export const themes = [
   { value: "light", label: "Light", icon: "/assets/icons/sun.svg" },
@@ -76,3 +76,35 @@ export const BADGE_CRITERIA = {
     GOLD: 100000,
   },
 };
+
+
+// Dashboards
+
+export const sidebardashLinks: SidebarDashLink[] = [
+  {
+    imgURL: "/assets/icons/suitcase.svg",
+    route: "/dashboard",
+    label: "Dashboard",
+  },
+  {
+    imgURL: "/assets/icons/users.svg",
+    route: "/templates",
+    label: "Templates",
+  },
+  {
+    imgURL: "/assets/icons/star.svg",
+    route: "/rulings",
+    label: "Rules & Procdures",
+  },
+  {
+    imgURL: "/assets/icons/suitcase.svg",
+    route: "/pendency",
+    label: "Pendency",
+  },
+  {
+    imgURL: "/assets/icons/home.svg",
+    route: "/",
+    label: "Home",
+  },
+  
+];

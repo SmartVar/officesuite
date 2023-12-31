@@ -6,6 +6,12 @@ export interface SidebarLink {
   label: string;
 }
 
+export interface SidebarDashLink {
+  imgURL: string;
+  route: string;
+  label: string;
+}
+
 export interface Job {
   id?: string;
   employer_name?: string;
