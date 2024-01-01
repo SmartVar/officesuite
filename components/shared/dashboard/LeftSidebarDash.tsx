@@ -1,13 +1,13 @@
 "use client"
 
-import { sidebarLinks } from '@/constants';
+import { sidebardashLinks } from '@/constants';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import { SignedOut } from '@clerk/nextjs';
 
-const LeftSidebar = () => {
+const LeftSidebarDash = () => {
   const pathname = usePathname();
   
   return (
@@ -15,7 +15,7 @@ const LeftSidebar = () => {
     sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto 
     border-r p-6 pt-36 shadow-light-300 dark:shadow-none max-sm:hidden lg:w-[266px]">
       <div className="flex flex-1 flex-col gap-6">
-        {sidebarLinks.map((item) => {
+        {sidebardashLinks.map((item) => {
           const isActive = (pathname.includes(item.route) && item.route.length > 1) || pathname === item.route;
 
           // TODO
@@ -77,4 +77,4 @@ const LeftSidebar = () => {
   )
 }
 
-export default LeftSidebar
+export default LeftSidebarDash

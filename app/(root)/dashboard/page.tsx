@@ -1,7 +1,7 @@
-import QuestionCard from "@/components/cards/QuestionCard";
-import HomeFilters from "@/components/home/HomeFilters";
+// import QuestionCard from "@/components/cards/QuestionCard";
+// import HomeFilters from "@/components/home/HomeFilters";
 import Filter from "@/components/shared/Filter";
-import NoResult from "@/components/shared/NoResult";
+// import NoResult from "@/components/shared/NoResult";
 import MonitorLinks from "@/components/shared/dashboard/MonitorLinks";
 import StaticCard from "@/components/shared/dashboard/StaticCard";
 import TableCard from "@/components/shared/dashboard/TableCard";
@@ -57,7 +57,8 @@ export default function Dashboard() {
         </Link> 
       </div> 
 
-      <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
+      <div className="mt-11 flex justify-between gap-5 
+      max-sm:flex-col sm:items-center">
         {/* <LocalSearchbar 
           route="/"
           iconPosition="left"
