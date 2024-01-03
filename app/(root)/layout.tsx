@@ -6,7 +6,7 @@ import LeftSidebarDash from '@/components/shared/dashboard/LeftSidebarDash'
 
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const path='/dashboard';
+  const path='/';
   
   return (
     <main className="background-light850_dark100 relative">
