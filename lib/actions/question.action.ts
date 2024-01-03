@@ -59,6 +59,8 @@ export async function createQuestion(params: CreateQuestionParams) {
     
     // Increment author's reputation by +5 for creating a question
 
+    //revalidate path inorder to display question wihtout reloading
+    
     revalidatePath(path)
   } catch (error) {
     
