@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+/* eslint-disable no-undef */
 
 import React from 'react'
 import { ClerkProvider } from '@clerk/nextjs'
