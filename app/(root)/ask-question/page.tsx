@@ -1,3 +1,4 @@
+
 import Question from '@/components/forms/Question'
 import { getUserById } from '@/lib/actions/user.action';
 // import { auth } from '@clerk/nextjs';
@@ -12,7 +13,7 @@ const Page = async () => {
 
   const mongoUser = await getUserById({ userId });
 
-  // console.log(mongoUser);
+  console.log(mongoUser);
 
   return (
     <div>
