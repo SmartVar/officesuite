@@ -2,7 +2,7 @@ import React from 'react'
 
 const Funds = () => {
   return (
-    <div>Funds</div>
+    <div>Funds required</div>
   )
 }
 
