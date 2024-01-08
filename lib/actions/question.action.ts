@@ -159,8 +159,7 @@ export async function deleteQuestion(params: DeleteQuestionParams) {
     await Question.deleteOne({ _id: questionId });
     await Answer.deleteMany({ question: questionId });
     await Interaction.deleteMany({ question: questionId });
-    await Tag.updateMany({ questions: questionId }, 
-      { $pull: { questions: questionId }});
+    await Tag.updateMany({ questions: questionId }, { $pull: { questions: questionId }});
 
     revalidatePath(path);
   } catch (error) {
@@ -188,5 +187,20 @@ export async function editQuestion(params: EditQuestionParams) {
     revalidatePath(path);
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function getHotQuestions() {
+  try {
+    connectToDatabase();
+
+    const hotQuestions = await Question.find({})
+      .sort({ views: -1, upvotes: -1 }) 
+      .limit(5);
+
+      return hotQuestions;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 }
