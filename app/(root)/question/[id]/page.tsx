@@ -30,8 +30,8 @@ const Page = async ({ params, searchParams }) => {
           <Link href={`/profile/${result.author.clerkId}`}
           className="flex items-center justify-start gap-1"  >
             <Image 
-            //   src={result.author.picture}
-              src="/assets/icons/clock.svg"
+              // src={result.author.picture}
+              src="/assets/icons/message.svg"
               className="rounded-full"
               width={22}
               height={22}
@@ -42,7 +42,7 @@ const Page = async ({ params, searchParams }) => {
             </p>
           </Link>
           <div className="flex justify-end">
-          <Votes 
+            <Votes 
               type="Question"
               itemId={JSON.stringify(result._id)}
               userId={JSON.stringify(mongoUser._id)}
@@ -100,6 +100,8 @@ const Page = async ({ params, searchParams }) => {
         questionId={result._id}
         userId={mongoUser._id}
         totalAnswers={result.answers.length}
+        page={searchParams?.page}
+        filter={searchParams?.filter}
       />
 
       <Answer 
