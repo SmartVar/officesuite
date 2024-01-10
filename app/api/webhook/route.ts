@@ -51,11 +51,7 @@ export async function POST(req: Request) {
   }
  
   const eventType = evt.type;
-
-  console.log({eventType})
  
-  // TODO: Add events below
-  
   if(eventType === 'user.created') {
     const { id, email_addresses, image_url, username, first_name, last_name } = evt.data;
 
@@ -99,6 +95,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'OK', user: deletedUser})
   }
  
-  return new Response('', { status: 201 })
+  return NextResponse.json({ message: 'OK' })
 }
  
