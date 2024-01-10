@@ -37,6 +37,7 @@
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
     "next": "^13.5.6",
+    "npm-check-updates": "^16.14.12",
     "postcss": "8.4.30",
     "prettier": "^3.0.3",
     "prismjs": "^1.29.0",
