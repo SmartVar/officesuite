@@ -1,121 +1,110 @@
-// import QuestionCard from "@/components/cards/QuestionCard";
-// import HomeFilters from "@/components/home/HomeFilters";
-import Filter from "@/components/shared/Filter";
-// import NoResult from "@/components/shared/NoResult";
-import MonitorLinks from "@/components/shared/dashboard/MonitorLinks";
-import StaticCard from "@/components/shared/dashboard/StaticCard";
-import TableCard from "@/components/shared/dashboard/TableCard";
-// import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
-import { Button } from "@/components/ui/button";
-import { SectionFilters } from "@/constants/filters";
-import Link from "next/link";
+import { Button } from '@/components/ui/button'
+import { getUserInfo } from '@/lib/actions/user.action'
+import { URLProps } from '@/types'
+import { SignedIn, auth } from '@clerk/nextjs'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-// const questions = [
-//   {
-//     _id: '1',
-//     title: 'Cascading Deletes in SQLAlchemy?',
-//     tags: [{ _id: '1', name: 'python' }, { _id: '2', name: 'sql' }],
-//     author: {
-//       _id: '1',
-//       name: 'John Doe',
-//       picture: 'john-doe.jpg',
-//     },
-//     upvotes: 1500000,
-//     views: 500552,
-//     answers: [],
-//     createdAt: new Date('2023-09-01T12:00:00.000Z'),
-//   },
-//   {
-//     _id: '2',
-//     title: 'How to center a div?',
-//     tags: [{ _id: '3', name: 'css' }, { _id: '4', name: 'html' }],
-//     author: {
-//       _id: '2',
-//       name: 'Jane Smith',
-//       picture: 'jane-smith.jpg',
-//     },
-//     upvotes: 5,
-//     views: 50,
-//     answers: [],
-//     createdAt: new Date('2021-09-02T10:30:00.000Z'),
-//   },
-// ];
+import React from 'react'
+import { getJoinedDate } from '@/lib/utils'
+import ProfileLink from '@/components/shared/ProfileLink'
+import Stats from '@/components/shared/Stats'
+import QuestionTab from '@/components/shared/QuestionTab'
+import AnswersTab from '@/components/shared/AnswersTab'
 
+const Page = async ({ params, searchParams}: URLProps) => {
+  const { userId: clerkId } = auth();
+  const userInfo = await getUserInfo({ userId: params.id})
 
-export default function Dashboard() {
   return (
     <>
-      <div className="flex w-full flex-col-reverse justify-between gap-4 
-      sm:flex-row sm:items-center">
-        <h1 className="h1-bold text-dark100_light900">DASHBOARD</h1> 
+      <div className="flex flex-col-reverse items-start justify-between sm:flex-row">
+        <div className="flex flex-col items-start gap-4 lg:flex-row">
+          <Image 
+            src={userInfo?.user.picture}
+            alt="profile picture"
+            width={140}
+            height={140}
+            className="rounded-full object-cover"
+          />
 
-        <Link href="/ask-question" className="flex justify-end max-sm:w-full">
-          <Button className="primary-gradient min-h-[46px] px-4 py-3
-           !text-light-900">
-            Update
-          </Button>
-        </Link> 
-      </div> 
+          <div className="mt-3">
+            <h2 className="h2-bold text-dark100_light900">{userInfo.user.name}</h2>
+            <p className="paragraph-regular text-dark200_light800">@{userInfo.user.username}</p>
 
-      <div className="mt-11 flex justify-between gap-5 
-      max-sm:flex-col sm:items-center">
-        {/* <LocalSearchbar 
-          route="/"
-          iconPosition="left"
-          imgSrc="/assets/icons/search.svg"
-          placeholder="Search for Section"
-          otherClasses="flex-1"
-        /> */}
+            <div className="mt-5 flex flex-wrap items-center justify-start gap-5">
+              {userInfo.user.portfolioWebsite && (
+                <ProfileLink 
+                  imgUrl="/assets/icons/link.svg"
+                  href={userInfo.user.portfolioWebsite}
+                  title="Portfolio"
+                />
+              )}
 
-        
+              {userInfo.user.location && (
+                <ProfileLink 
+                  imgUrl="/assets/icons/location.svg"
+                  title={userInfo.user.location}
+                />
+              )}
 
-        <Filter
-          filters={SectionFilters}
-          otherClasses="min-h-[56px] sm:min-w-[170px]"
-          containerClasses="hidden max-md:flex"
-        />
+                <ProfileLink 
+                  imgUrl="/assets/icons/calendar.svg"
+                  title={getJoinedDate(userInfo.user.joinedAt)}
+                />
+            </div>
+
+            {userInfo.user.bio && (
+              <p className="paragraph-regular text-dark400_light800 mt-8">
+                {userInfo.user.bio}
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="flex justify-end max-sm:mb-5 max-sm:w-full sm:mt-3">
+          <SignedIn>
+            {clerkId === userInfo.user.clerkId && (
+              <Link href="/profile/edit">
+                <Button className="paragraph-medium btn-secondary text-dark300_light900 min-h-[46px] min-w-[175px] px-4 py-3">
+                  Edit Profile
+                </Button>
+              </Link>
+            )}
+          </SignedIn>
+        </div>
       </div>
+      
+      <Stats 
+        totalQuestions={userInfo.totalQuestions}
+        totalAnswers={userInfo.totalAnswers}
+      />
 
-      {/* <HomeFilters /> */}
-
-      <div className="mt-10 flex w-full flex-col gap-6">
-        <div>
-        <StaticCard 
-        
-        />
-        </div>
-
-        <div>
-        <TableCard />
-        </div>
-
-        <div>
-        <MonitorLinks />
-        </div>
-
-
-        {/* {questions.length > 0 ?
-          questions.map((question) => (
-            <QuestionCard 
-              key={question._id}
-              _id={question._id}
-              title={question.title}
-              tags={question.tags}
-              author={question.author}
-              upvotes={question.upvotes}
-              views={question.views}
-              answers={question.answers}
-              createdAt={question.createdAt}
+      <div className="mt-10 flex gap-10">
+        <Tabs defaultValue="top-posts" className="flex-1">
+          <TabsList className="background-light800_dark400 min-h-[42px] p-1">
+            <TabsTrigger value="top-posts" className="tab">Top Posts</TabsTrigger>
+            <TabsTrigger value="answers" className="tab">Answers</TabsTrigger>
+          </TabsList>
+          <TabsContent value="top-posts">
+            <QuestionTab 
+              searchParams={searchParams}
+              userId={userInfo.user._id}
+              clerkId={clerkId}
             />
-          ))
-          : <NoResult 
-            title="There’s no question to show"
-            description="Be the first to break the silence! 🚀 Ask a Question and kickstart the discussion. our query could be the next big thing others learn from. Get involved! 💡"
-            link="/ask-question"
-            linkTitle="Ask a Question"
-          />} */}
-
+          </TabsContent>
+          <TabsContent value="answers" className="flex w-full flex-col gap-6">
+            <AnswersTab 
+              searchParams={searchParams}
+              userId={userInfo.user._id}
+              clerkId={clerkId}
+            />
+          </TabsContent>
+        </Tabs>
       </div>
     </>
   )
 }
+
+export default Page
