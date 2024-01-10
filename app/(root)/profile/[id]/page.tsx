@@ -19,8 +19,7 @@ const Page = async ({ params, searchParams}: URLProps) => {
 
   return (
     <>
-      <div className="flex flex-col-reverse items-start justify-between 
-      sm:flex-row">
+      <div className="flex flex-col-reverse items-start justify-between sm:flex-row">
         <div className="flex flex-col items-start gap-4 lg:flex-row">
           <Image 
             // src={userInfo?.user.picture}
@@ -69,8 +68,7 @@ const Page = async ({ params, searchParams}: URLProps) => {
           <SignedIn>
             {clerkId === userInfo.user.clerkId && (
               <Link href="/profile/edit">
-                <Button className="paragraph-medium btn-secondary 
-                text-dark300_light900 min-h-[46px] min-w-[175px] px-4 py-3">
+                <Button className="paragraph-medium btn-secondary text-dark300_light900 min-h-[46px] min-w-[175px] px-4 py-3">
                   Edit Profile
                 </Button>
               </Link>
@@ -79,9 +77,11 @@ const Page = async ({ params, searchParams}: URLProps) => {
         </div>
       </div>
       
-      <Stats 
+      <Stats
+        reputation={userInfo.reputation}
         totalQuestions={userInfo.totalQuestions}
         totalAnswers={userInfo.totalAnswers}
+        badges={userInfo.badgeCounts}
       />
 
       <div className="mt-10 flex gap-10">
