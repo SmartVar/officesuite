@@ -22,8 +22,7 @@ const Page = async ({ params, searchParams}: URLProps) => {
       <div className="flex flex-col-reverse items-start justify-between sm:flex-row">
         <div className="flex flex-col items-start gap-4 lg:flex-row">
           <Image 
-            // src={userInfo?.user.picture}
-            src="/assets/icons/location.svg"
+            src={userInfo?.user.picture}
             alt="profile picture"
             width={140}
             height={140}
@@ -90,7 +89,7 @@ const Page = async ({ params, searchParams}: URLProps) => {
             <TabsTrigger value="top-posts" className="tab">Top Posts</TabsTrigger>
             <TabsTrigger value="answers" className="tab">Answers</TabsTrigger>
           </TabsList>
-          <TabsContent value="top-posts">
+          <TabsContent value="top-posts" className='mt-5 flex w-full flex-col gap-6'>
             <QuestionTab 
               searchParams={searchParams}
               userId={userInfo.user._id}
