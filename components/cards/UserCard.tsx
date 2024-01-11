@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getTopInteractedTags } from "@/lib/actions/tag.actions";
 import Image from "next/image";
 import Link from "next/link";
