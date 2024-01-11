@@ -157,3 +157,10 @@ export interface GetUserStatsParams {
 export interface DeleteUserParams {
   clerkId: string;
 }
+
+export interface RecommendedParams {
+  userId: string;
+  page?: number;
+  pageSize?: number;
+  searchQuery?: string;
+}
