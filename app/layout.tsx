@@ -1,9 +1,12 @@
-/* eslint-disable react/jsx-no-undef */
-/* eslint-disable no-undef */
-// @ts-nocheck
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+/* eslint-disable camelcase */
+import React from 'react'
+import { ClerkProvider } from '@clerk/nextjs'
+import { Inter, Space_Grotesk } from 'next/font/google'
+import type { Metadata } from 'next';
+
+import './globals.css';
+import '../styles/prism.css';
+import { ThemeProvider } from '@/context/ThemeProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -11,6 +14,7 @@ const inter = Inter({
   variable: '--font-inter'
 }) 
 
+// eslint-disable-next-line no-undef
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
