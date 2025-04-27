@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { ClerkProvider } from '@clerk/nextjs'
+// import { ClerkProvider,SignedIn,SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
+import { ClerkProvider} from '@clerk/nextjs'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import type { Metadata } from 'next';
 
@@ -22,7 +23,7 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: "DevFlow",
+  title: "Workzone",
   description: "A community-driven platform where one can lets take this as the only test project ask question and get answer",
   icons: {
     icon: '/assets/images/site-logo.svg'
@@ -34,9 +35,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-        <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
-        <ClerkProvider
+    
+    <ClerkProvider
     appearance={{
       elements: {
         formButtonPrimary: 'primary-gradient',
@@ -44,11 +44,23 @@ export default function RootLayout({
             }
           }}
           >
+          <html lang="en">
+        <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
+        {/* <header className="flex h-16 items-center justify-end gap-4 p-4">
+            <SignedOut>
+              <SignInButton />
+              <SignUpButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </header> */}
             <ThemeProvider>
           {children}
           </ThemeProvider>
-          </ClerkProvider>
+          
               </body>
       </html>
+      </ClerkProvider>
     )
 }
